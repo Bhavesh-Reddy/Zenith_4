@@ -1,0 +1,146 @@
+.team-container {
+  padding: 32px 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.member-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.member-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.status-indicator {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-primary);
+}
+
+.status-indicator.online { background: #22c55e; }
+.status-indicator.offline { background: #94a3b8; }
+.status-indicator.busy { background: #ef4444; }
+
+.member-avatar {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--indigo-500), var(--indigo-700));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.member-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.member-role {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--indigo-600);
+  background: var(--indigo-50);
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.dark-mode .member-role {
+  background: rgba(99, 102, 241, 0.2);
+  color: var(--indigo-100);
+}
+
+.member-email {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.member-actions {
+  width: 100%;
+}
+
+.btn-sm {
+  width: 100%;
+  font-size: 13px;
+  padding: 6px;
+}
+
+/* Add Card Style */
+.member-card.add-card {
+  border: 2px dashed var(--border-color);
+  background: transparent;
+  cursor: pointer;
+  justify-content: center;
+  gap: 16px;
+  min-height: 260px;
+}
+
+.member-card.add-card:hover {
+  border-color: var(--indigo-500);
+  background: var(--bg-secondary);
+}
+
+.add-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: all 0.2s;
+}
+
+.add-card:hover .add-icon {
+  background: var(--indigo-100);
+  color: var(--indigo-600);
+}
+
+.add-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.add-card:hover .add-text {
+  color: var(--indigo-600);
+}
