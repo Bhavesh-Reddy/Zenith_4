@@ -1,0 +1,468 @@
+/* ── Z4 App Background ─────────────────────────────────────────── */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.app-main {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+}
+
+/* Subtle purple nebula glow in bg */
+.app-layout::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 20% 15%, rgba(80, 80, 180, 0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 85%, rgba(100, 80, 200, 0.05) 0%, transparent 55%);
+}
+
+/* Welcome heading Z4 style */
+.welcome-heading {
+  background: linear-gradient(135deg, #D0D0F8 20%, #8080D0 60%, #6060C0) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.welcome-icon {
+  background: linear-gradient(135deg, #5050C0, #9090D8) !important;
+  box-shadow: 0 8px 28px rgba(90, 90, 200, 0.45) !important;
+  animation: glowPulse 3s ease-in-out infinite !important;
+}
+
+/* User message bubble — Z4 purple */
+.chat-message.user .message-bubble {
+  background: linear-gradient(135deg, #5050C0, #7070D4) !important;
+  box-shadow: 0 2px 12px rgba(80, 80, 200, 0.3) !important;
+}
+
+/* AI message bubble */
+.chat-message.assistant .message-bubble {
+  background: var(--bg-card) !important;
+  border-color: var(--border-medium) !important;
+}
+
+/* User avatar */
+.chat-message.user .message-avatar {
+  background: linear-gradient(135deg, #5050C0, #8080D0) !important;
+}
+
+/* AI avatar */
+.chat-message.assistant .message-avatar {
+  background: linear-gradient(135deg, #404090, #7070C0) !important;
+}
+
+/* Input container */
+.input-container {
+  background: var(--bg-card) !important;
+  border-color: var(--border-medium) !important;
+}
+
+.input-container:focus-within {
+  border-color: #7070C8 !important;
+  box-shadow: var(--shadow-md), 0 0 0 3px rgba(100, 100, 200, 0.2) !important;
+}
+
+/* Send button */
+.send-btn.active {
+  background: linear-gradient(135deg, #5050C0, #8080D0) !important;
+  box-shadow: 0 2px 12px rgba(80, 80, 200, 0.4) !important;
+}
+
+/* Suggestion chips */
+.suggestion-chip:hover {
+  border-color: #7070C8 !important;
+  color: #A0A0E8 !important;
+}
+
+/* Mic listening */
+.mic-btn.listening {
+  color: #A080E0 !important;
+  background: rgba(130, 80, 220, 0.1) !important;
+}
+
+/* Typing indicator */
+.typing-avatar {
+  background: linear-gradient(135deg, #404090, #7070C0) !important;
+}
+
+/* Settings */
+.settings-avatar {
+  background: linear-gradient(135deg, #5050C0, #8080D0) !important;
+  box-shadow: 0 4px 14px rgba(80, 80, 200, 0.4) !important;
+}
+
+.settings-tab.active {
+  color: #A0A0E8 !important;
+}
+
+.toggle-switch.on {
+  background: linear-gradient(135deg, #5050C0, #8080D0) !important;
+}
+
+.share-action-icon {
+  background: linear-gradient(135deg, #5050C0, #8080D0) !important;
+}
+
+.circle-start-btn,
+.circle-search-btn,
+.circle-close-done-btn,
+.lens-confirm-btn {
+  background: linear-gradient(135deg, #5050C0, #8080D0) !important;
+  box-shadow: 0 4px 16px rgba(80, 80, 200, 0.4) !important;
+}
+
+.circle-intro-icon {
+  background: linear-gradient(135deg, #5050C0, #8080D0) !important;
+  box-shadow: 0 6px 22px rgba(80, 80, 200, 0.45) !important;
+}
+/* Override brand icon for Z4 */
+.brand-icon {
+  background: linear-gradient(135deg, #6060C0, #9B8FD4) !important;
+  box-shadow: 0 2px 12px rgba(100, 100, 200, 0.4) !important;
+}
+
+.new-chat-full-btn {
+  background: linear-gradient(135deg, #5858C0, #8080D0) !important;
+  box-shadow: 0 2px 10px rgba(90, 90, 200, 0.35) !important;
+}
+
+.new-chat-full-btn:hover {
+  box-shadow: 0 4px 18px rgba(90, 90, 200, 0.5) !important;
+}
+
+.user-avatar {
+  background: linear-gradient(135deg, #5858C0, #8080D0) !important;
+  box-shadow: 0 2px 8px rgba(90, 90, 200, 0.35) !important;
+}
+
+.sidebar-icon-btn.new-chat-icon {
+  background: linear-gradient(135deg, #5858C0, #8080D0) !important;
+}
+
+.chat-item.active .chat-item-icon {
+  color: #9090E0 !important;
+}
+
+.footer-btn:hover { color: #A0A0E8 !important; }
+
+[data-theme="dark"] .theme-toggle-track {
+  background: rgba(100, 100, 200, 0.2) !important;
+  border-color: #8080D0 !important;
+}
+
+.theme-toggle-thumb.dark {
+  background: #7070C8 !important;
+}
+/* ═══════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — Full overhaul for phones & tablets
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Tablet (≤ 900px) ─────────────────────────────────── */
+@media (max-width: 900px) {
+  :root {
+    --sidebar-width: 240px;
+  }
+}
+
+/* ── Mobile (≤ 768px) ─────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* App layout — overlay sidebar instead of side-by-side */
+  .app-layout {
+    flex-direction: row;
+    position: relative;
+  }
+
+  /* Sidebar becomes a full-height drawer that slides in */
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px !important;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-right: 1px solid var(--border-medium) !important;
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  /* Collapsed sidebar hides on mobile */
+  .sidebar-collapsed {
+    display: none !important;
+  }
+
+  /* Main takes full width */
+  .app-main {
+    width: 100vw !important;
+    flex: 1;
+  }
+
+  /* Messages padding reduced */
+  .messages-list {
+    padding: 16px 14px !important;
+    gap: 12px !important;
+  }
+
+  /* Message bubbles wider on mobile */
+  .message-body {
+    max-width: 88% !important;
+  }
+
+  /* Welcome screen */
+  .welcome-screen {
+    padding: 40px 20px 10px !important;
+    min-height: 200px !important;
+  }
+
+  .welcome-heading {
+    font-size: 1.7rem !important;
+  }
+
+  .welcome-greeting {
+    font-size: 1rem !important;
+  }
+
+  .welcome-icon {
+    width: 52px !important;
+    height: 52px !important;
+    margin-bottom: 14px !important;
+  }
+
+  /* Suggestion chips — scrollable row on mobile */
+  .suggestions-area {
+    padding: 0 14px 12px !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .suggestions-chips {
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+
+  .suggestion-chip {
+    flex-shrink: 0;
+    padding: 8px 14px !important;
+    font-size: 0.82rem !important;
+  }
+
+  /* Input area */
+  .input-area {
+    padding: 8px 12px 12px !important;
+  }
+
+  .input-container {
+    border-radius: 20px !important;
+  }
+
+  .message-input {
+    font-size: 16px !important; /* prevents iOS zoom on focus */
+  }
+
+  /* Input disclaimer */
+  .input-disclaimer {
+    font-size: 0.68rem !important;
+  }
+}
+
+/* ── Small phones (≤ 480px) ───────────────────────────── */
+@media (max-width: 480px) {
+  .welcome-heading {
+    font-size: 1.4rem !important;
+  }
+
+  .messages-list {
+    padding: 12px 10px !important;
+  }
+
+  .message-body {
+    max-width: 92% !important;
+  }
+
+  .message-bubble {
+    padding: 9px 13px !important;
+  }
+}
+
+/* ══════════════════════════════════
+   MOBILE HEADER (hamburger menu)
+   ══════════════════════════════════ */
+.mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex;
+  }
+}
+
+.mobile-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-header-icon {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #5050C0, #8080D0);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.mobile-header-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mobile-menu-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--bg-hover);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.mobile-menu-btn:hover {
+  background: var(--bg-active);
+  color: var(--text-primary);
+}
+
+/* Sidebar backdrop overlay */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .sidebar-backdrop {
+    display: block;
+  }
+}
+
+/* ══════════════════════════════════
+   SETTINGS PANEL — mobile friendly
+   ══════════════════════════════════ */
+@media (max-width: 768px) {
+  .settings-overlay {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  .settings-panel {
+    max-width: 100% !important;
+    border-radius: 24px 24px 0 0 !important;
+    max-height: 90vh !important;
+  }
+
+  .settings-tabs {
+    gap: 2px !important;
+  }
+
+  .settings-tab span {
+    display: none; /* icons only on mobile */
+  }
+
+  .theme-cards {
+    gap: 8px !important;
+  }
+}
+
+/* ══════════════════════════════════
+   CIRCLE SEARCH — mobile
+   ══════════════════════════════════ */
+@media (max-width: 768px) {
+  .circle-search-panel {
+    max-width: 100% !important;
+    border-radius: 24px 24px 0 0 !important;
+    margin: 0 !important;
+  }
+
+  .circle-search-modal {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
+  .lens-toolbar {
+    bottom: 16px !important;
+    padding: 8px 14px !important;
+    gap: 8px !important;
+    max-width: calc(100vw - 32px) !important;
+  }
+
+  .lens-hint {
+    font-size: 0.78rem !important;
+  }
+}
+
+/* ══════════════════════════════════
+   TOUCH IMPROVEMENTS
+   ══════════════════════════════════ */
+@media (hover: none) {
+  /* Show action buttons on touch without hover */
+  .message-actions {
+    opacity: 1 !important;
+  }
+
+  .chat-item-actions {
+    display: flex !important;
+  }
+
+  /* Larger tap targets */
+  .msg-action-btn {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .input-icon-btn {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .send-btn {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
