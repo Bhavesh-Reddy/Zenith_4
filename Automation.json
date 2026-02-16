@@ -1,0 +1,255 @@
+{
+  "name": "Telegram Drive to YouTube Upload (One Command)",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "list",
+        "limit": 1,
+        "queryFilters": {
+          "name": [
+            {
+              "value": "={{ $json.body.filename }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "72dab8ab-a942-41fa-89b7-5ca35a7ffd90",
+      "name": "Drive Search",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [
+        2176,
+        512
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "b4iJaGbYmzeWxTey",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "c954a67e-bbc8-44cb-bff2-72893a37a350",
+      "name": "Drive Download",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [
+        2368,
+        512
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "b4iJaGbYmzeWxTey",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "upload",
+        "title": "={{ $('Webhook').item.json.body.title }}",
+        "regionCode": "IN",
+        "categoryId": "=28",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [
+        2576,
+        512
+      ],
+      "id": "4e26ae6e-f0d0-45f8-9bc4-c220b9115d07",
+      "name": "Upload a video1",
+      "credentials": {
+        "youTubeOAuth2Api": {
+          "id": "0VhrAK2YH8XqbYRw",
+          "name": "YouTube account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "196ZiBUDF40n1CN9l5kBtnYYXFtqmvaZAgrOY0-6x5Os",
+          "mode": "list",
+          "cachedResultName": "N8N",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/196ZiBUDF40n1CN9l5kBtnYYXFtqmvaZAgrOY0-6x5Os/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/196ZiBUDF40n1CN9l5kBtnYYXFtqmvaZAgrOY0-6x5Os/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "UPLOADED": "={{ $('Webhook').item.json.body.title }}"
+          },
+          "matchingColumns": [
+            "uploadId"
+          ],
+          "schema": [
+            {
+              "id": "UPLOADED",
+              "displayName": "UPLOADED",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "uploadId",
+              "displayName": "uploadId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2736,
+        512
+      ],
+      "id": "49af5246-1ca4-4c55-bac2-d6a78622677a",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YslHJISb4OdHyeS2",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "3f20bcd7-c847-4f72-bafc-5971e91a3c8f",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        1968,
+        512
+      ],
+      "id": "f0430b29-02e4-4ef9-9259-a504b9be46c4",
+      "name": "Webhook",
+      "webhookId": "3f20bcd7-c847-4f72-bafc-5971e91a3c8f"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"message\": \"Video {{ $('Webhook').item.json.body.title }} uploaded successfully\"\n}\n ",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2976,
+        512
+      ],
+      "id": "33a012f7-c315-4bbd-9446-91d47ff91f78",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Drive Search": {
+      "main": [
+        [
+          {
+            "node": "Drive Download",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drive Download": {
+      "main": [
+        [
+          {
+            "node": "Upload a video1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload a video1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Drive Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c157ccb5-3580-4067-89d3-ef1c2a611e3b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e4bc49437d9e64db7574faba0c213f993b16ac91d26d639ff7e2916adbbc8377"
+  },
+  "id": "q75rW4fx2mX3Now3",
+  "tags": []
+}
