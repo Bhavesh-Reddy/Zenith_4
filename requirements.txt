@@ -1,0 +1,122 @@
+# Zenith_4 - Multi-Project Workspace Requirements
+
+## System Requirements
+- Node.js (v16 or higher)
+- MongoDB (for Forge project)
+- Python 3.8+ (for automation workflows)
+- Git
+
+## Node.js Dependencies
+
+### Forge Project (React + Express)
+# Frontend Dependencies
+react@^19.2.4
+react-dom@^19.2.4
+react-router-dom@^7.13.0
+react-scripts@5.0.1
+@tiptap/react@^2.8.0
+@tiptap/starter-kit@^2.8.0
+@tiptap/extension-color@^2.8.0
+@tiptap/extension-highlight@^2.8.0
+@tiptap/extension-image@^2.8.0
+@tiptap/extension-link@^2.8.0
+@tiptap/extension-placeholder@^2.8.0
+@tiptap/extension-task-item@^2.8.0
+@tiptap/extension-task-list@^2.8.0
+@tiptap/extension-text-align@^2.8.0
+@tiptap/extension-text-style@^2.8.0
+@tiptap/extension-underline@^2.8.0
+lucide-react@^0.564.0
+date-fns@^4.1.0
+axios@^1.13.5
+web-vitals@^2.1.4
+
+# Backend Dependencies
+express@^5.2.1
+mongoose@^8.23.0
+cors@^2.8.6
+dotenv@^17.3.1
+
+# Development Dependencies
+concurrently@^9.2.1
+nodemon@^3.1.11
+@testing-library/react@^16.3.2
+@testing-library/jest-dom@^6.9.1
+@testing-library/dom@^10.4.1
+@testing-library/user-event@^13.5.0
+
+### Mistral Chat Project (React + Express)
+# Frontend Dependencies
+react@^18.2.0
+react-dom@^18.2.0
+vite@^5.0.8
+@vitejs/plugin-react@^4.2.1
+axios@^1.6.0
+html2canvas@^1.4.1
+lucide-react@^0.309.0
+react-markdown@^9.0.1
+rehype-highlight@^7.0.0
+remark-gfm@^4.0.0
+uuid@^9.0.0
+
+# Backend Dependencies
+express@^4.18.2
+cors@^2.8.5
+dotenv@^16.3.1
+axios@^1.6.0
+tesseract.js@^5.0.4
+
+# Development Dependencies
+nodemon@^3.0.2
+@types/react@^18.2.43
+@types/react-dom@^18.2.17
+
+## API Keys Required
+
+### Mistral Chat Project
+HUGGINGFACE_API_KEY=your_huggingface_token_here
+ELEVENLABS_API_KEY=your_elevenlabs_key_here (optional)
+
+### Forge Project
+MONGODB_URI=mongodb://localhost:27017/forge
+
+## Installation Commands
+
+# Install Forge dependencies
+cd forge && npm install
+
+# Install Mistral Chat Frontend dependencies
+cd mistral-chat/frontend && npm install
+
+# Install Mistral Chat Backend dependencies
+cd mistral-chat/backend && npm install
+
+## Development Commands
+
+# Start Forge (full stack)
+cd forge && npm run dev
+
+# Start Mistral Chat Backend
+cd mistral-chat/backend && npm run dev
+
+# Start Mistral Chat Frontend
+cd mistral-chat/frontend && npm run dev
+
+## Production Build Commands
+
+# Build Forge
+cd forge && npm run build
+
+# Build Mistral Chat Frontend
+cd mistral-chat/frontend && npm run build
+
+## Database Setup
+
+# MongoDB for Forge project
+# Install MongoDB locally or use MongoDB Atlas
+# Default connection: mongodb://localhost:27017/forge
+
+## Optional Tools
+# N8N for automation workflows (see Automation.json)
+# Docker (for containerized deployment)
+# PM2 (for production process management)
